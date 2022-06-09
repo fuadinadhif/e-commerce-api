@@ -10,7 +10,7 @@ Hoping this could be used similar to [REQRES API](https://reqres.in/) someday.
 
 This project served on MongoDB Atlas (free tier ofcourse :slightly_smiling_face:) so you can used directly after installed the dependecies and set up the environment variables. Or you can clone this repo and set up your own server.
 
-**Note**: Because of the limitation of free tier on MongoDB Atlas. The database will be cleaned up periodically.
+**Note**: Because of the limitation of free tier on MongoDB Atlas. The database will be clean up periodically.
 
 ## Installation
 
