@@ -43,7 +43,7 @@ const showCurrentUser = async (req, res, next) => {
   }
 };
 
-// * Update Password Using findOneAndUpdate
+// * Update Password Using findOneAndUpdate Query
 // const updateUser = async (req, res, next) => {
 //   try {
 //     const { name, email } = req.body;
@@ -65,7 +65,7 @@ const showCurrentUser = async (req, res, next) => {
 //     next(error);
 //   }
 // };
-// * Update User Using documents.prototype.save()
+// * Update User Using Documents.prototype.save() API
 const updateUser = async (req, res, next) => {
   try {
     const { name, email } = req.body;

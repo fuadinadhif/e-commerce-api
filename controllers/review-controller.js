@@ -49,7 +49,7 @@ const createReview = async (req, res, next) => {
     const { product: productID } = req.body; // product required by ReviewSchema
     const isValidProduct = await ProductModel.findOne({ _id: productID });
     if (!isValidProduct) {
-      throw new NotFoundError("Product you wanna review does not exist");
+      throw new NotFoundError("Product you want to review does not exist");
     }
 
     const alreadySubmitted = await ReviewModel.findOne({
@@ -85,9 +85,7 @@ const updateReview = async (req, res, next) => {
     review.comment = comment;
 
     await review.save();
-    res
-      .status(StatusCodes.OK)
-      .json({ message: "Review has been updated bommbayah" });
+    res.status(StatusCodes.OK).json({ message: "Review has been updated" });
   } catch (error) {
     next(error);
   }
