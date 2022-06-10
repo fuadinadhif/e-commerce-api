@@ -44,7 +44,6 @@ const showCurrentUser = async (req, res, next) => {
   }
 };
 
-// * Update User Using Documents.prototype.save() API
 const updateUser = async (req, res, next) => {
   try {
     const { name, email } = req.body;
