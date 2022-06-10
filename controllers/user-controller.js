@@ -28,6 +28,7 @@ const getSingleUser = async (req, res, next) => {
     if (!user) {
       throw new NotFoundError(`User with ID: ${req.params.id} does not exist`);
     }
+
     checkPermission(req.user, user._id);
     res.status(StatusCodes.OK).json({ user });
   } catch (error) {
@@ -43,28 +44,6 @@ const showCurrentUser = async (req, res, next) => {
   }
 };
 
-// * Update Password Using findOneAndUpdate Query
-// const updateUser = async (req, res, next) => {
-//   try {
-//     const { name, email } = req.body;
-//     if (!name || !email) {
-//       throw new BadRequestError("Please fill in the new user name and email");
-//     }
-
-//     const user = await UserModel.findOneAndUpdate(
-//       { _id: req.user.id },
-//       { name, email },
-//       { new: true, runValidators: true }
-//     );
-//     const tokenPayload = createTokenPayload(user);
-//     attachCookiesToResponse(res, tokenPayload);
-//     res
-//       .status(StatusCodes.OK)
-//       .json({ message: "User profile has been updated" });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
 // * Update User Using Documents.prototype.save() API
 const updateUser = async (req, res, next) => {
   try {
@@ -87,6 +66,28 @@ const updateUser = async (req, res, next) => {
     next(error);
   }
 };
+// * Update Password Using findOneAndUpdate Query
+// const updateUser = async (req, res, next) => {
+//   try {
+//     const { name, email } = req.body;
+//     if (!name || !email) {
+//       throw new BadRequestError("Please fill in the new user name and email");
+//     }
+
+//     const user = await UserModel.findOneAndUpdate(
+//       { _id: req.user.id },
+//       { name, email },
+//       { new: true, runValidators: true }
+//     );
+//     const tokenPayload = createTokenPayload(user);
+//     attachCookiesToResponse(res, tokenPayload);
+//     res
+//       .status(StatusCodes.OK)
+//       .json({ message: "User profile has been updated" });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 const updateUserPassword = async (req, res, next) => {
   try {
@@ -98,7 +99,9 @@ const updateUserPassword = async (req, res, next) => {
     const user = await UserModel.findOne({ _id: req.user.id });
     const isPasswordCorrect = await user.comparePassword(oldPassword);
     if (!isPasswordCorrect) {
-      throw new UnauthorizedError("Wrong old password");
+      throw new UnauthorizedError(
+        "New password does not match with the old ones"
+      );
     }
 
     user.password = newPassword;

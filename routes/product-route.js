@@ -13,14 +13,20 @@ const {
   authenticateUser,
   authorizePermissions,
 } = require("../middleware/auth-mdw");
+const multer = require("multer");
+const upload = multer({ dest: "./public/assets/temp-products-img" });
 
 router
   .route("/")
   .get(getAllProducts)
   .post(authenticateUser, authorizePermissions("admin"), createProduct);
-router
-  .route("/uploadImage")
-  .post(authenticateUser, authorizePermissions("admin"), uploadImage);
+router.post(
+  "/uploadImage",
+  upload.single("image"),
+  authenticateUser,
+  authorizePermissions("admin"),
+  uploadImage
+);
 router
   .route("/:id")
   .get(getSingleProduct)

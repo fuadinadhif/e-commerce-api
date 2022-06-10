@@ -2,6 +2,8 @@ const { StatusCodes } = require("http-status-codes");
 const { NotFoundError, BadRequestError } = require("../errors");
 const path = require("path");
 const ProductModel = require("../models/product-model");
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
 
 const getAllProducts = async (req, res, next) => {
   try {
@@ -38,21 +40,12 @@ const createProduct = async (req, res, next) => {
 
 const uploadImage = async (req, res, next) => {
   try {
-    if (!req.files) {
-      throw new BadRequestError("Please attach an image");
-    }
-
-    const productImage = req.files.image;
-    if (!productImage.mimetype.startsWith("image")) {
-      throw new BadRequestError("Please provide a file with type of image");
-    }
-
-    const imagePath = path.join(
-      __dirname,
-      "../public/uploads/" + productImage.name
-    );
-    await productImage.mv(imagePath);
-    res.status(StatusCodes.OK).json({ image: imagePath });
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      use_filename: true,
+      folder: "e-commerce-api",
+    });
+    fs.unlinkSync(req.file.path);
+    return res.status(200).json({ image: { src: result.secure_url } });
   } catch (error) {
     next(error);
   }

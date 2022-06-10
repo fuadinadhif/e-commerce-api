@@ -5,7 +5,7 @@ const authenticateUser = (req, res, next) => {
   try {
     const token = req.signedCookies.accessToken;
     if (!token) {
-      throw new UnauthorizedError("No token provided");
+      throw new UnauthorizedError("No token provided. Please log in first");
     }
 
     const validTokenPayload = validateToken(token);
@@ -25,9 +25,10 @@ const authenticateUser = (req, res, next) => {
 const authorizePermissions = (...roles) => {
   return (req, res, next) => {
     try {
-      console.log(roles);
       if (!roles.includes(req.user.role)) {
-        throw new ForbiddenError("Restricted access");
+        throw new ForbiddenError(
+          "Restricted access. Please log in as Admin to access this page"
+        );
       }
       next();
     } catch (error) {

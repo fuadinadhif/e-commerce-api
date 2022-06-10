@@ -4,9 +4,9 @@ const { BadRequestError, NotFoundError } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 const { checkPermission } = require("../utils");
 
-// *NOT A CONTROLLER/Fake Stripe API - Try to change it.
+// * Fake Stripe API - Please change it to the official API from Stripe
 const fakeStripeAPI = async ({ amount, currency }) => {
-  const client_secret = "someRandomValue";
+  const client_secret = "fakeStripeClientSecret";
   return { client_secret, amount };
 };
 
@@ -14,7 +14,7 @@ const createOrder = async (req, res, next) => {
   try {
     const { items: cartItems, tax, shippingFee } = req.body;
     if (!cartItems || cartItems.length < 1) {
-      throw new BadRequestError("No items in cart");
+      throw new BadRequestError("There is no items in cart");
     }
 
     if (!tax || !shippingFee) {
@@ -95,7 +95,7 @@ const getCurrentUserOrders = async (req, res, next) => {
   try {
     const order = await OrderModel.find({ user: req.user.id });
     if (!order || order.length < 1) {
-      throw new NotFoundError("User didn't order anything yet");
+      throw new NotFoundError("User did not order anything yet");
     }
     res.status(StatusCodes.OK).json({ order });
   } catch (error) {

@@ -12,7 +12,9 @@ const register = async (req, res, next) => {
     const { email } = req.body;
     const emailAlreadyExist = await UserModel.findOne({ email });
     if (emailAlreadyExist) {
-      throw new BadRequestError("Email has been used. Please use another");
+      throw new BadRequestError(
+        "Email has been used. Please use another address"
+      );
     }
 
     const isFirstAccount = (await UserModel.countDocuments({})) === 0;
@@ -32,7 +34,7 @@ const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      throw new BadRequestError("Please fill in the form");
+      throw new BadRequestError("Please provide a valid email and password");
     }
 
     const user = await UserModel.findOne({ email });
@@ -42,7 +44,7 @@ const login = async (req, res, next) => {
 
     const isPasswordCorrect = await user.comparePassword(password);
     if (!isPasswordCorrect) {
-      throw new UnauthorizedError("Wrong password");
+      throw new UnauthorizedError("Wrong password. Try Again");
     }
 
     const tokenPayload = createTokenPayload(user);
@@ -60,7 +62,7 @@ const logout = async (req, res, next) => {
       httpOnly: true,
       expires: new Date(Date.now()),
     });
-    res.status(StatusCodes.OK).json({ message: "logout" });
+    res.status(StatusCodes.OK).json({ message: "User has been logged out" });
   } catch (error) {
     next(error);
   }
