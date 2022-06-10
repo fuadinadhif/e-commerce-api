@@ -66,28 +66,6 @@ const updateUser = async (req, res, next) => {
     next(error);
   }
 };
-// * Update Password Using findOneAndUpdate Query
-// const updateUser = async (req, res, next) => {
-//   try {
-//     const { name, email } = req.body;
-//     if (!name || !email) {
-//       throw new BadRequestError("Please fill in the new user name and email");
-//     }
-
-//     const user = await UserModel.findOneAndUpdate(
-//       { _id: req.user.id },
-//       { name, email },
-//       { new: true, runValidators: true }
-//     );
-//     const tokenPayload = createTokenPayload(user);
-//     attachCookiesToResponse(res, tokenPayload);
-//     res
-//       .status(StatusCodes.OK)
-//       .json({ message: "User profile has been updated" });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
 
 const updateUserPassword = async (req, res, next) => {
   try {

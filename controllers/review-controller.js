@@ -56,7 +56,6 @@ const createReview = async (req, res, next) => {
       product: productID,
       user: req.user.id,
     });
-
     if (alreadySubmitted) {
       throw new BadRequestError("User already gave review for this product");
     }
@@ -95,7 +94,7 @@ const deleteReview = async (req, res, next) => {
   try {
     const review = await ReviewModel.findOne({ _id: req.params.id });
     if (!review) {
-      throw new NotFoundError("Review you wanna delete does not exist");
+      throw new NotFoundError("Review you want to delete does not exist");
     }
 
     checkPermission(req.user, review.user);
