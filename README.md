@@ -8,9 +8,9 @@ Hoping this could be used similar to [REQRES API](https://reqres.in/) someday.
 
 ## Usage
 
-This project served on MongoDB Atlas (free tier of course :slightly_smiling_face:) so you can used it directly using the [documentation](https://e-commerce-api-docs.herokuapp.com/) as a guide. Or you can clone this repo and set up your own server.
+This project served on MongoDB Atlas and assets on Cloudinary (both free tier of course :slightly_smiling_face:) so you can used it directly using the [documentation](https://e-commerce-api-docs.herokuapp.com/) as a guide. Or you can clone this repo and set up your own server.
 
-**Note**: Because of the limitation of free tier on MongoDB Atlas. The database will be clean up periodically.
+**Note**: Because of the limitation of free tier on MongoDB Atlas and Cloudinary. The database will be clean up periodically.
 
 ## Installation
 
@@ -26,11 +26,15 @@ To run this project, you will need to add the following environment variables to
 `MONGO_URI`
 `JWT_SECRET`
 `JWT_LIFETIME`
+`CLOUD_NAME`
+`CLOUD_API_KEY`
+`CLOUD_API_SECRET`
 
 ## Stack
 
 - Node.js/Express
 - MongoDB/Mongoose
+- Cloudinary
 - Documentation: [Docgen](https://github.com/thedevsaddam/docgen) (Easier setup compared too [Swagger](https://swagger.io/) but way less features)
 
 ## License
