@@ -6,6 +6,11 @@ const errorMDW = (error, req, res, next) => {
     message: error.message || `Unexpected Error. Goodluck figure it out.`,
   };
 
+  if (error.name === "CastError") {
+    customError.statusCode = StatusCodes.BAD_REQUEST;
+    customError.message = `Invalid URL parameters. (${error.value}) does not meet the parameters criteria`;
+  }
+
   return res
     .status(customError.statusCode)
     .json({ message: customError.message });
