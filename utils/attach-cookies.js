@@ -1,7 +1,7 @@
-const { createToken } = require("./create-validate-token");
+const { createJWToken } = require("./jwt-token");
 
 const attachCookiesToResponse = (res, tokenPayload) => {
-  const token = createToken(tokenPayload);
+  const token = createJWToken(tokenPayload);
 
   const oneDay = 1000 * 60 * 60 * 24;
   res.cookie("accessToken", token, {

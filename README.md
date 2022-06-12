@@ -3,7 +3,7 @@
 Full API documentation hosted on https://e-commerce-api-docs.herokuapp.com/
 
 This is an experimental API design of commonly used REST API for an e-Commerce.
-Feel free to use it for your own project but own your risk as this project still on experimental stage.
+Feel free to use it for your own project but own your risks as this project still on experimental stage.
 Hoping this could be used similar to [REQRES API](https://reqres.in/) someday.
 
 ## Usage

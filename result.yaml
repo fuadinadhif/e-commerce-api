@@ -3,21 +3,17 @@ info:
   title: Sample API
   description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
   version: 0.1.9
-servers:
-  - url: http://api.example.com/v1
-    description: Optional server description, e.g. Main (production) server
-  - url: http://staging-api.example.com
-    description: Optional server description, e.g. Internal staging server for testing
 
 servers:
-  - url: http://{{url}}
+  - url: http://api.example.com/v1
+
 tags:
   - name: auth
   - name: user
   - name: product
   - name: review
   - name: order
-  
+
 paths:
   /auth/logout:
     get:
@@ -25,7 +21,7 @@ paths:
         - auth
       summary: Logout User
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -43,7 +39,7 @@ paths:
                 email: john.doe@gmail.com
                 password: thesecret
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -62,7 +58,7 @@ paths:
                 email: john.doe@gmail.com
                 password: thesecret
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -72,7 +68,7 @@ paths:
         - user
       summary: Get All Users
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -82,7 +78,7 @@ paths:
         - user
       summary: Get Single User
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -92,7 +88,7 @@ paths:
         - user
       summary: Get Current User
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -110,7 +106,7 @@ paths:
                 name: Jane Doe
                 email: jane.doe@gmail.com
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -128,7 +124,7 @@ paths:
                 oldPassword: thesecret
                 newPassword: onlysecret
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -138,7 +134,7 @@ paths:
         - product
       summary: Get All Products
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -166,10 +162,10 @@ paths:
                 category: bedroom
                 company: ikea
                 colors:
-                  - '#0000ff'
-                  - '#000'
+                  - "#0000ff"
+                  - "#000"
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -179,7 +175,7 @@ paths:
         - product
       summary: Get Single Product
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -205,7 +201,7 @@ paths:
                   cupidatat non proident, sunt in culpa qui officia deserunt
                   mollit anim id est laborum.
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -215,7 +211,7 @@ paths:
         - product
       summary: Get Single Product Reviews
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -234,7 +230,7 @@ paths:
                   type: string
                   format: binary
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -244,7 +240,7 @@ paths:
         - product
       summary: Delete Product
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -254,7 +250,7 @@ paths:
         - review
       summary: Get All Reviews
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -275,7 +271,7 @@ paths:
                   price.
                 product: 62a37f66ea6bfcf12484abeb
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -285,7 +281,7 @@ paths:
         - review
       summary: Get Single Review
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -306,7 +302,7 @@ paths:
                   my backpain but lately it make some 'cricket sound' that may
                   indicate some part is already broken.
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -316,7 +312,7 @@ paths:
         - review
       summary: Delete Review
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -326,7 +322,7 @@ paths:
         - order
       summary: Get All Orders
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -350,7 +346,7 @@ paths:
                     amount: 3
                     product: 62a37f66ea6bfcf12484abeb
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -360,7 +356,7 @@ paths:
         - order
       summary: Get Single Order
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -370,7 +366,7 @@ paths:
         - order
       summary: Get Current User Orders
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -387,7 +383,7 @@ paths:
               example:
                 paymentIntentID: paidUsingFakeStripePaymentIntentID
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
