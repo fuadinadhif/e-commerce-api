@@ -19,11 +19,11 @@ const register = async (req, res, next) => {
 
     const isFirstAccount = (await UserModel.countDocuments({})) === 0;
     const role = isFirstAccount ? "admin" : "user";
-
     const user = await UserModel.create({ ...req.body, role });
-    const tokenPayload = createTokenPayload(user);
 
+    const tokenPayload = createTokenPayload(user);
     attachCookiesToResponse(res, tokenPayload);
+
     res.status(StatusCodes.CREATED).json({ user: tokenPayload });
   } catch (error) {
     next(error);
@@ -48,8 +48,8 @@ const login = async (req, res, next) => {
     }
 
     const tokenPayload = createTokenPayload(user);
-
     attachCookiesToResponse(res, tokenPayload);
+
     res.status(StatusCodes.OK).json({ user: tokenPayload });
   } catch (error) {
     next(error);
@@ -62,6 +62,7 @@ const logout = async (req, res, next) => {
       httpOnly: true,
       expires: new Date(Date.now()),
     });
+
     res.status(StatusCodes.OK).json({ message: "User has been logged out" });
   } catch (error) {
     next(error);

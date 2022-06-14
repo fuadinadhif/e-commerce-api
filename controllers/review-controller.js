@@ -1,7 +1,7 @@
 const ReviewModel = require("../models/review-model");
 const ProductModel = require("../models/product-model");
-const { NotFoundError, BadRequestError } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
+const { NotFoundError, BadRequestError } = require("../errors");
 const { checkPermission } = require("../utils");
 
 const getAllReviews = async (req, res, next) => {
@@ -10,6 +10,7 @@ const getAllReviews = async (req, res, next) => {
       path: "product",
       select: "name price category",
     });
+
     res.status(StatusCodes.OK).json({ count: reviews.length, reviews });
   } catch (error) {
     next(error);
@@ -38,6 +39,7 @@ const getSingleProductReviews = async (req, res, next) => {
     }
 
     const reviews = await ReviewModel.find({ product: id });
+
     res.status(StatusCodes.OK).json({ count: reviews.length, reviews });
   } catch (error) {
     next(error);

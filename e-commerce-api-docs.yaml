@@ -1,0 +1,687 @@
+openapi: 3.0.0
+info:
+  title: e-Commerce API Docs
+  description: This is an experimental API design of commonly used REST API for an e-Commerce. This API design is still full of uncompleted features/dummy data. Make sure to review the code before cloning/using it for your own project. <br><br> To access admin protected routes, log in with this credentials:<br><br> `email:super.admin@gmail.com`<br><br>`password:supersecret`
+  contact: {}
+  version: "1.0"
+servers:
+  - url: http://https://e-commerce-api-docs.herokuapp.com/api/v1
+    variables: {}
+paths:
+  /auth/logout:
+    get:
+      tags:
+        - auth
+      summary: Log Out User
+      operationId: LogOutUser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Log In User
+      operationId: LogInUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogInUserRequest"
+            example:
+              email: john.doe@gmail.com
+              password: thesecret
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+        "400":
+          description: Please provide a valid email and password
+        "401":
+          description: Wrong password. Try Again
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: "{email} has not been registered yet"
+          content:
+            application/json:
+              schema:
+                type: object
+      deprecated: false
+      security: []
+    parameters: []
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterUserRequest"
+            example:
+              name: John Doe
+              email: john.doe@gmail.com
+              password: thesecret
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+        "400":
+          description: Email has been used. Please use another address
+          content:
+            application/json:
+              schema:
+                type: object
+      deprecated: false
+      security: []
+    parameters: []
+  /users:
+    get:
+      tags:
+        - user
+      summary: Get All Users
+      operationId: GetAllUsers
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /users/showCurrentUser:
+    get:
+      tags:
+        - user
+      summary: Get Current User
+      operationId: GetCurrentUser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /users/updateUserProfile:
+    patch:
+      tags:
+        - user
+      summary: Update User Profile
+      operationId: UpdateUserProfile
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserProfileRequest"
+            example:
+              name: Jane Doe
+              email: jane.doe@gmail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /users/updateUserPassword:
+    patch:
+      tags:
+        - user
+      summary: Update User Password
+      operationId: UpdateUserPassword
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserPasswordRequest"
+            example:
+              oldPassword: thesecret
+              newPassword: onlysecret
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: Get Single User
+      operationId: GetSingleUser
+      parameters:
+        - name: id
+          in: path
+          description: The user ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /products:
+    get:
+      tags:
+        - product
+      summary: Get All Products
+      operationId: GetAllProducts
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - product
+      summary: Create Product
+      operationId: CreateProduct
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProductRequest"
+            example:
+              name: emperor bed
+              price: 23999
+              description: Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge
+              image: https://dl.airtable.com/.attachmentThumbnails/0446e84c5bca9643de3452a61b2d6195/1b32f48b
+              category: bedroom
+              company: ikea
+              colors:
+                - "#0000ff"
+                - "#000"
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /products/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: The product ID
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - product
+      summary: Get Single Product
+      operationId: GetSingleProduct
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    patch:
+      tags:
+        - product
+      summary: Update Product
+      operationId: UpdateProduct
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProductRequest"
+            example:
+              name: accent chair
+              price: 15999
+              description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    delete:
+      tags:
+        - product
+      summary: Delete Product
+      operationId: DeleteProduct
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /products/{id}/reviews:
+    get:
+      tags:
+        - product
+      summary: Get Single Product Reviews
+      operationId: GetSingleProductReviews
+      parameters:
+        - name: id
+          in: path
+          description: The product ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /products/uploadImage:
+    post:
+      tags:
+        - product
+      summary: Upload Image
+      operationId: UploadImage
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - image
+              type: object
+              properties:
+                image:
+                  type: string
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /reviews:
+    get:
+      tags:
+        - review
+      summary: Get All Reviews
+      operationId: GetAllReviews
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - review
+      summary: Create Review
+      operationId: CreateReview
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReviewRequest"
+            example:
+              title: Super comfy. Great for backpain!
+              rating: 4
+              comment: It ease up and relieve my backpain a lot. Definitely worth the price.
+              product: 62a37f66ea6bfcf12484abeb
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /reviews/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: The review ID
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - review
+      summary: Get Single Review
+      operationId: GetSingleReview
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    patch:
+      tags:
+        - review
+      summary: Update Review
+      operationId: UpdateReview
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateReviewRequest"
+            example:
+              title: Its good but ain't durable
+              rating: 3
+              comment: I buy it around 1 month ago. At first it helps me a lot with my backpain but lately it make some 'cricket sound' that may indicate some part is already broken.
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    delete:
+      tags:
+        - review
+      summary: Delete Review
+      operationId: DeleteReview
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /orders:
+    get:
+      tags:
+        - order
+      summary: Get All Orders
+      operationId: GetAllOrders
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - order
+      summary: Create Order
+      operationId: CreateOrder
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderRequest"
+            example:
+              tax: 499
+              shippingFee: 799
+              items:
+                - name: accent chair
+                  price: 15999
+                  image: https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160
+                  amount: 3
+                  product: 62a37f66ea6bfcf12484abeb
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /orders/showAllMyOrders:
+    get:
+      tags:
+        - order
+      summary: Get Current User Orders
+      operationId: GetCurrentUserOrders
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /orders/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: The order ID
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - order
+      summary: Get Single Order
+      operationId: GetSingleOrder
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    patch:
+      tags:
+        - order
+      summary: Update Status Order
+      operationId: UpdateStatusOrder
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStatusOrderRequest"
+            example:
+              paymentIntentID: paidUsingFakeStripePaymentIntentID
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    LogInUserRequest:
+      title: LogInUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    UpdateUserProfileRequest:
+      title: UpdateUserProfileRequest
+      required:
+        - name
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+    UpdateUserPasswordRequest:
+      title: UpdateUserPasswordRequest
+      required:
+        - oldPassword
+        - newPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+    CreateProductRequest:
+      title: CreateProductRequest
+      required:
+        - name
+        - price
+        - description
+        - image
+        - category
+        - company
+        - colors
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+        description:
+          type: string
+        image:
+          type: string
+        category:
+          type: string
+        company:
+          type: string
+        colors:
+          type: array
+          items:
+            type: string
+          description: ""
+    UpdateProductRequest:
+      title: UpdateProductRequest
+      required:
+        - name
+        - price
+        - description
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+        description:
+          type: string
+    CreateReviewRequest:
+      title: CreateReviewRequest
+      required:
+        - title
+        - rating
+        - comment
+        - product
+      type: object
+      properties:
+        title:
+          type: string
+        rating:
+          type: integer
+        comment:
+          type: string
+        product:
+          type: string
+    UpdateReviewRequest:
+      title: UpdateReviewRequest
+      required:
+        - title
+        - rating
+        - comment
+      type: object
+      properties:
+        title:
+          type: string
+        rating:
+          type: integer
+        comment:
+          type: string
+    CreateOrderRequest:
+      title: CreateOrderRequest
+      required:
+        - tax
+        - shippingFee
+        - items
+      type: object
+      properties:
+        tax:
+          type: integer
+        shippingFee:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+          description: ""
+    Item:
+      title: Item
+      required:
+        - name
+        - price
+        - image
+        - amount
+        - product
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+        image:
+          type: string
+        amount:
+          type: integer
+        product:
+          type: string
+    UpdateStatusOrderRequest:
+      title: UpdateStatusOrderRequest
+      required:
+        - paymentIntentID
+      type: object
+      properties:
+        paymentIntentID:
+          type: string
+tags:
+  - name: auth
+  - name: user
+  - name: product
+  - name: review
+  - name: order

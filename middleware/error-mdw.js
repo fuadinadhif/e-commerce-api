@@ -11,6 +11,20 @@ const errorMDW = (error, req, res, next) => {
     customError.message = `Invalid URL parameters. (${error.value}) does not meet the parameters criteria`;
   }
 
+  if (error.code && error.code === 11000) {
+    customError.statusCode = StatusCodes.BAD_REQUEST;
+    customError.message = `Duplicate value entered for ${Object.keys(
+      error.keyValue
+    )} field, please choose another value`;
+  }
+
+  if (error.name === "ValidationError") {
+    customError.statusCode = StatusCodes.BAD_REQUEST;
+    customError.message = Object.values(error.errors)
+      .map((error) => error.message)
+      .join(" and ");
+  }
+
   return res
     .status(customError.statusCode)
     .json({ message: customError.message });

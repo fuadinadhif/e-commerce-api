@@ -1,8 +1,8 @@
 const OrderModel = require("../models/order-model");
 const ProductModel = require("../models/product-model");
+const { checkPermission } = require("../utils");
 const { BadRequestError, NotFoundError } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
-const { checkPermission } = require("../utils");
 
 // * Fake Stripe API - Please change it to the official API from Stripe
 const fakeStripeAPI = async ({ amount, currency }) => {
@@ -46,6 +46,7 @@ const createOrder = async (req, res, next) => {
     }
 
     const total = tax + shippingFee + subTotal;
+
     const paymentIntent = await fakeStripeAPI({
       amount: total,
       currency: "usd",
@@ -72,6 +73,7 @@ const createOrder = async (req, res, next) => {
 const getAllOrders = async (req, res, next) => {
   try {
     const orders = await OrderModel.find({});
+
     res.status(StatusCodes.OK).json({ count: orders.length, orders });
   } catch (error) {
     next(error);
@@ -84,7 +86,9 @@ const getSingleOrder = async (req, res, next) => {
     if (!order) {
       throw new NotFoundError("Product you search for does not exist");
     }
+
     checkPermission(req.user, order.user);
+
     res.status(StatusCodes.OK).json({ order });
   } catch (error) {
     next(error);
@@ -97,6 +101,7 @@ const getCurrentUserOrders = async (req, res, next) => {
     if (!order || order.length < 1) {
       throw new NotFoundError("User did not order anything yet");
     }
+
     res.status(StatusCodes.OK).json({ order });
   } catch (error) {
     next(error);
@@ -116,6 +121,7 @@ const updateOrder = async (req, res, next) => {
 
     order.paymentIntentID = paymentIntentID;
     order.status = "paid";
+
     await order.save();
 
     res.status(StatusCodes.OK).json({ order });

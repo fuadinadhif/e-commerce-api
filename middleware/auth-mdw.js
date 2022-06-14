@@ -1,5 +1,5 @@
 const { UnauthorizedError, ForbiddenError } = require("../errors");
-const { validateToken } = require("../utils");
+const { validateJWToken } = require("../utils");
 
 const authenticateUser = (req, res, next) => {
   try {
@@ -8,14 +8,14 @@ const authenticateUser = (req, res, next) => {
       throw new UnauthorizedError("No token provided. Please log in first");
     }
 
-    const validTokenPayload = validateToken(token);
-
+    const validTokenPayload = validateJWToken(token);
     req.user = {
       id: validTokenPayload.id,
       name: validTokenPayload.name,
       email: validTokenPayload.email,
       role: validTokenPayload.role,
     };
+
     next();
   } catch (error) {
     next(error);
@@ -30,6 +30,7 @@ const authorizePermissions = (...roles) => {
           "Restricted access. Please log in as Admin to access this page"
         );
       }
+
       next();
     } catch (error) {
       next(error);

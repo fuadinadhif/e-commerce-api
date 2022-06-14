@@ -14,6 +14,7 @@ const {
 const getAllUsers = async (req, res, next) => {
   try {
     const users = await UserModel.find({ role: "user" }).select("-password");
+
     res.status(StatusCodes.OK).json({ users });
   } catch (error) {
     next(error);
@@ -30,6 +31,7 @@ const getSingleUser = async (req, res, next) => {
     }
 
     checkPermission(req.user, user._id);
+
     res.status(StatusCodes.OK).json({ user });
   } catch (error) {
     next(error);
@@ -48,16 +50,18 @@ const updateUser = async (req, res, next) => {
   try {
     const { name, email } = req.body;
     if (!name || !email) {
-      throw new BadRequestError("Please provide both new user name and email");
+      throw new BadRequestError("Please provide the new user name and email");
     }
 
     const user = await UserModel.findOne({ _id: req.user.id });
     user.name = name;
     user.email = email;
+
     await user.save();
 
     const tokenPayload = createTokenPayload(user);
     attachCookiesToResponse(res, tokenPayload);
+
     res
       .status(StatusCodes.OK)
       .json({ message: "User profile has been updated" });
@@ -82,7 +86,9 @@ const updateUserPassword = async (req, res, next) => {
     }
 
     user.password = newPassword;
+
     await user.save();
+
     res.status(StatusCodes.OK).json({ message: "Password has been changed" });
   } catch (error) {
     next(error);

@@ -3,6 +3,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
 const cloudinary = require("cloudinary").v2;
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -35,14 +37,18 @@ app.use(cors());
 app.use(mongoSanitize());
 
 app.use(express.json());
-app.use(express.static("./public")); // to use assets on public folder
-app.use(cookieParser(process.env.JWT_SECRET)); // to use req.cookies
+app.use(express.static("./public"));
+app.use(cookieParser(process.env.JWT_SECRET));
+
+const swaggerDocument = YAML.load("./e-commerce-api-docs.yaml");
+app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
+
 app.use(notFoundMDW);
 app.use(errorMWD);
 
