@@ -5,7 +5,7 @@ const checkPermission = (userRequester, userTarget) => {
   if (userRequester.id === userTarget.toString()) return;
 
   throw new ForbiddenError(
-    "Restricted access. You do not have enough permission to access this page"
+    "restricted access. you do not have enough permission to access this page"
   );
 };
 

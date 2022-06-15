@@ -14,7 +14,7 @@ const register = async (req, res, next) => {
     const emailAlreadyExist = await UserModel.findOne({ email });
     if (emailAlreadyExist) {
       throw new BadRequestError(
-        "email has been used. Please use another address"
+        "email has been used. please use another address"
       );
     }
 
@@ -50,7 +50,7 @@ const login = async (req, res, next) => {
 
     const isPasswordCorrect = await user.comparePassword(password);
     if (!isPasswordCorrect) {
-      throw new UnauthorizedError("wrong password. try Again");
+      throw new UnauthorizedError("wrong password. try again");
     }
 
     const tokenPayload = createTokenPayload(user);

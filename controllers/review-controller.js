@@ -21,7 +21,7 @@ const getSingleReview = async (req, res, next) => {
   try {
     const review = await ReviewModel.findOne({ _id: req.params.id });
     if (!review) {
-      throw new NotFoundError("Review does not exist");
+      throw new NotFoundError("review does not exist");
     }
 
     res.status(StatusCodes.OK).json({ review });
@@ -35,7 +35,7 @@ const getSingleProductReviews = async (req, res, next) => {
     const { id } = req.params;
     const product = await ProductModel.findOne({ _id: id });
     if (!product) {
-      throw new NotFoundError(`Product with ID: ${id} does not exist`);
+      throw new NotFoundError(`product with ID: ${id} does not exist`);
     }
 
     const reviews = await ReviewModel.find({ product: id });
@@ -51,7 +51,7 @@ const createReview = async (req, res, next) => {
     const { product: productID } = req.body; // product required by ReviewSchema
     const isValidProduct = await ProductModel.findOne({ _id: productID });
     if (!isValidProduct) {
-      throw new NotFoundError("Product you want to review does not exist");
+      throw new NotFoundError("product you want to review does not exist");
     }
 
     const alreadySubmitted = await ReviewModel.findOne({
@@ -59,7 +59,7 @@ const createReview = async (req, res, next) => {
       user: req.user.id,
     });
     if (alreadySubmitted) {
-      throw new BadRequestError("User already gave review for this product");
+      throw new BadRequestError("user already gave review for this product");
     }
 
     req.body.user = req.user.id;
@@ -76,7 +76,7 @@ const updateReview = async (req, res, next) => {
 
     const review = await ReviewModel.findOne({ _id: req.params.id });
     if (!review) {
-      throw new NotFoundError("Cannot update a review that does not exist");
+      throw new NotFoundError("cannot update a review that does not exist");
     }
 
     checkPermission(req.user, review.user);
@@ -86,7 +86,7 @@ const updateReview = async (req, res, next) => {
     review.comment = comment;
 
     await review.save();
-    res.status(StatusCodes.OK).json({ message: "Review has been updated" });
+    res.status(StatusCodes.OK).json({ message: "review has been updated" });
   } catch (error) {
     next(error);
   }
@@ -96,12 +96,12 @@ const deleteReview = async (req, res, next) => {
   try {
     const review = await ReviewModel.findOne({ _id: req.params.id });
     if (!review) {
-      throw new NotFoundError("Review you want to delete does not exist");
+      throw new NotFoundError("review you want to delete does not exist");
     }
 
     checkPermission(req.user, review.user);
     await review.remove();
-    res.status(StatusCodes.OK).json({ message: "Review has been deleted" });
+    res.status(StatusCodes.OK).json({ message: "review has been deleted" });
   } catch (error) {
     next(error);
   }

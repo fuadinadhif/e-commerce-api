@@ -15,6 +15,8 @@ paths:
       responses:
         "200":
           description: successful operation
+        "500":
+          description: unexpected error
   /auth/login:
     post:
       tags:
@@ -25,7 +27,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/LogInUserRequest"
+              $ref: "#/components/schemas/LogInUser"
             example:
               email: john.doe@gmail.com
               password: thesecret
@@ -34,11 +36,13 @@ paths:
         "200":
           description: succesful operation
         "400":
-          description: invalid email and/or password
+          description: invalid credentials
         "401":
-          description: wrong password
+          description: invalid password
         "404":
-          description: unregistered email
+          description: email not found
+        "500":
+          description: unexpected error
   /auth/register:
     post:
       tags:
@@ -49,7 +53,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RegisterUserRequest"
+              $ref: "#/components/schemas/RegisterUser"
             example:
               name: John Doe
               email: john.doe@gmail.com
@@ -59,7 +63,9 @@ paths:
         "200":
           description: successful operation
         "400":
-          description: email has been registered
+          description: email is already registered
+        "500":
+          description: unexpected error
   /users:
     get:
       tags:
@@ -69,7 +75,13 @@ paths:
       responses:
         "200":
           description: successful operation
-  /users/showCurrentUser:
+        "401":
+          description: invalid token supplied
+        "403":
+          description: restricted access
+        "500":
+          description: unexpected error
+  /users/getCurrentUser:
     get:
       tags:
         - user
@@ -78,6 +90,8 @@ paths:
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
   /users/updateUserProfile:
     patch:
       tags:
@@ -88,7 +102,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateUserProfileRequest"
+              $ref: "#/components/schemas/UpdateUserProfile"
             example:
               name: Jane Doe
               email: jane.doe@gmail.com
@@ -97,7 +111,9 @@ paths:
         "200":
           description: successful operation
         "400":
-          description: invalid user name and/or email
+          description: invalid credentials
+        "401":
+          description: invalid password
   /users/updateUserPassword:
     patch:
       tags:
@@ -108,7 +124,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateUserPasswordRequest"
+              $ref: "#/components/schemas/UpdateUserPassword"
             example:
               oldPassword: thesecret
               newPassword: onlysecret
@@ -117,10 +133,10 @@ paths:
         "200":
           description: successful operation
         "400":
-          description: invalid user password
+          description: null input supplied
         "401":
-          description: incorrect password
-  /user/{id}:
+          description: invalid password
+  /users/{id}:
     get:
       tags:
         - user
@@ -136,6 +152,10 @@ paths:
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
+        "404":
+          description: user not found
   /products:
     get:
       tags:
@@ -154,7 +174,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateProductRequest"
+              $ref: "#/components/schemas/CreateProduct"
             example:
               name: emperor bed
               price: 23999
@@ -169,6 +189,10 @@ paths:
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
+        "403":
+          description: restricted access. reserved for admin
   /products/uploadImage:
     post:
       tags:
@@ -189,6 +213,10 @@ paths:
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
+        "403":
+          description: restricted access. reserved for admin
   /products/{id}:
     parameters:
       - name: id
@@ -206,7 +234,7 @@ paths:
         "200":
           description: successful operation
         "404":
-          description: product does not exist
+          description: product not found
     patch:
       tags:
         - product
@@ -216,7 +244,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateProductRequest"
+              $ref: "#/components/schemas/UpdateProduct"
             example:
               name: accent chair
               price: 15999
@@ -225,8 +253,12 @@ paths:
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
+        "403":
+          description: restricted access. reserved for admin
         "404":
-          description: product does not exist
+          description: product not found
     delete:
       tags:
         - product
@@ -235,6 +267,10 @@ paths:
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
+        "403":
+          description: restricted access. reserved for admin
   /products/{id}/reviews:
     get:
       tags:
@@ -252,7 +288,7 @@ paths:
         "200":
           description: successful operation
         "404":
-          description: product does not exist
+          description: product not found
   /reviews:
     get:
       tags:
@@ -271,7 +307,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateReviewRequest"
+              $ref: "#/components/schemas/CreateReview"
             example:
               title: Super comfy. Great for backpain!
               rating: 4
@@ -283,8 +319,10 @@ paths:
           description: successful operation
         "400":
           description: user already reviewed
+        "401":
+          description: invalid token supplied
         "404":
-          description: product to be reviewed does not exist
+          description: product to be reviewed was not found
   /reviews/{id}:
     parameters:
       - name: id
@@ -302,7 +340,7 @@ paths:
         "200":
           description: successful operation
         "404":
-          description: review does not exist
+          description: review not found
     patch:
       tags:
         - review
@@ -312,7 +350,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateReviewRequest"
+              $ref: "#/components/schemas/UpdateReview"
             example:
               title: Its good but ain't durable
               rating: 3
@@ -321,8 +359,10 @@ paths:
       responses:
         "200":
           description: successful operation
+        "403":
+          description: restricted access
         "404":
-          description: review does not exist
+          description: review not found
     delete:
       tags:
         - review
@@ -331,8 +371,10 @@ paths:
       responses:
         "200":
           description: successful operation
+        "403":
+          description: restricted access
         "404":
-          description: review does not exist
+          description: review not found
   /orders:
     get:
       tags:
@@ -342,6 +384,10 @@ paths:
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
+        "403":
+          description: restricted access. reserved for admin
     post:
       tags:
         - order
@@ -351,7 +397,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateOrderRequest"
+              $ref: "#/components/schemas/CreateOrder"
             example:
               tax: 499
               shippingFee: 799
@@ -366,10 +412,12 @@ paths:
         "200":
           description: successful operation
         "400":
-          description: invalid request
+          description: invalid input supplied
+        "401":
+          description: invalid token supplied
         "404":
-          description: product does not exist
-  /orders/showAllMyOrders:
+          description: product not found
+  /orders/getCurrentUserOrders:
     get:
       tags:
         - order
@@ -378,8 +426,10 @@ paths:
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
         "404":
-          description: empty cart
+          description: order not found
   /orders/{id}:
     parameters:
       - name: id
@@ -396,6 +446,12 @@ paths:
       responses:
         "200":
           description: order does not exist
+        "401":
+          description: invalid token supplied
+        "403":
+          description: restricted access
+        "404":
+          description: order not found
     patch:
       tags:
         - order
@@ -405,19 +461,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateStatusOrderRequest"
+              $ref: "#/components/schemas/UpdateStatusOrder"
             example:
               paymentIntentID: paidUsingFakeStripePaymentIntentID
         required: true
       responses:
         "200":
           description: successful operation
+        "401":
+          description: invalid token supplied
+        "403":
+          description: restricted access
         "404":
           description: order does not exist
 components:
   schemas:
-    LogInUserRequest:
-      title: LogInUserRequest
+    LogInUser:
+      title: Log In User Request
       required:
         - email
         - password
@@ -427,8 +487,8 @@ components:
           type: string
         password:
           type: string
-    RegisterUserRequest:
-      title: RegisterUserRequest
+    RegisterUser:
+      title: Register User Request
       required:
         - name
         - email
@@ -441,8 +501,8 @@ components:
           type: string
         password:
           type: string
-    UpdateUserProfileRequest:
-      title: UpdateUserProfileRequest
+    UpdateUserProfile:
+      title: Update User Profile Request
       required:
         - name
         - email
@@ -452,8 +512,8 @@ components:
           type: string
         email:
           type: string
-    UpdateUserPasswordRequest:
-      title: UpdateUserPasswordRequest
+    UpdateUserPassword:
+      title: Update User Password Request
       required:
         - oldPassword
         - newPassword
@@ -463,8 +523,8 @@ components:
           type: string
         newPassword:
           type: string
-    CreateProductRequest:
-      title: CreateProductRequest
+    CreateProduct:
+      title: Create Product Request
       required:
         - name
         - price
@@ -492,8 +552,8 @@ components:
           items:
             type: string
           description: ""
-    UpdateProductRequest:
-      title: UpdateProductRequest
+    UpdateProduct:
+      title: Update Product Request
       required:
         - name
         - price
@@ -506,8 +566,8 @@ components:
           type: integer
         description:
           type: string
-    CreateReviewRequest:
-      title: CreateReviewRequest
+    CreateReview:
+      title: Create Review Request
       required:
         - title
         - rating
@@ -523,8 +583,8 @@ components:
           type: string
         product:
           type: string
-    UpdateReviewRequest:
-      title: UpdateReviewRequest
+    UpdateReview:
+      title: Update Review Request
       required:
         - title
         - rating
@@ -537,8 +597,8 @@ components:
           type: integer
         comment:
           type: string
-    CreateOrderRequest:
-      title: CreateOrderRequest
+    CreateOrder:
+      title: Create Order Request
       required:
         - tax
         - shippingFee
@@ -552,10 +612,10 @@ components:
         items:
           type: array
           items:
-            $ref: "#/components/schemas/Item"
+            $ref: "#/components/schemas/SingleItemOrder"
           description: ""
-    Item:
-      title: Item
+    SingleItemOrder:
+      title: Single Item Order
       required:
         - name
         - price
@@ -574,8 +634,8 @@ components:
           type: integer
         product:
           type: string
-    UpdateStatusOrderRequest:
-      title: UpdateStatusOrderRequest
+    UpdateStatusOrder:
+      title: Update Status Order Request
       required:
         - paymentIntentID
       type: object

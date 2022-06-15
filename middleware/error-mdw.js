@@ -3,17 +3,17 @@ const { StatusCodes } = require("http-status-codes");
 const errorMDW = (error, req, res, next) => {
   let customError = {
     statusCode: error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
-    message: error.message || `Unexpected Error. Goodluck figure it out.`,
+    message: error.message || `unexpected error. goodluck figure it out.`,
   };
 
   if (error.name === "CastError") {
     customError.statusCode = StatusCodes.BAD_REQUEST;
-    customError.message = `Invalid URL parameters. (${error.value}) does not meet the parameters criteria`;
+    customError.message = `invalid URL parameters. (${error.value}) does not meet the parameters criteria`;
   }
 
   if (error.code && error.code === 11000) {
     customError.statusCode = StatusCodes.BAD_REQUEST;
-    customError.message = `Duplicate value entered for ${Object.keys(
+    customError.message = `duplicated value entered for ${Object.keys(
       error.keyValue
     )} field, please choose another value`;
   }

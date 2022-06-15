@@ -20,7 +20,7 @@ const getSingleProduct = async (req, res, next) => {
       "reviews"
     );
     if (!product) {
-      throw new NotFoundError("Product does not exist");
+      throw new NotFoundError("product does not exist");
     }
 
     res.status(StatusCodes.OK).json({ product });
@@ -66,9 +66,10 @@ const updateProduct = async (req, res, next) => {
       }
     );
     if (!product) {
-      throw new NotFoundError("The product you want to update does not exist");
+      throw new NotFoundError("the product you want to update does not exist");
     }
-    res.status(StatusCodes.OK).json({ message: "Product has been updated" });
+
+    res.status(StatusCodes.OK).json({ message: "product has been updated" });
   } catch (error) {
     next(error);
   }
@@ -80,7 +81,7 @@ const deleteProduct = async (req, res, next) => {
 
     await product.remove();
 
-    res.status(StatusCodes.OK).json({ message: "Product has been deleted" });
+    res.status(StatusCodes.OK).json({ message: "product has been deleted" });
   } catch (error) {
     next(error);
   }

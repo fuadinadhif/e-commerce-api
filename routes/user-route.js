@@ -3,8 +3,8 @@ const router = express.Router();
 const {
   getAllUsers,
   getSingleUser,
-  showCurrentUser,
-  updateUser,
+  getCurrentUser,
+  updateUserProfile,
   updateUserPassword,
 } = require("../controllers/user-controller");
 const {
@@ -15,8 +15,8 @@ const {
 router
   .route("/")
   .get(authenticateUser, authorizePermissions("admin", "owner"), getAllUsers);
-router.route("/showCurrentUser").get(authenticateUser, showCurrentUser);
-router.route("/updateUserProfile").patch(authenticateUser, updateUser);
+router.route("/getCurrentUser").get(authenticateUser, getCurrentUser);
+router.route("/updateUserProfile").patch(authenticateUser, updateUserProfile);
 router.route("/updateUserPassword").patch(authenticateUser, updateUserPassword);
 router.route("/:id").get(authenticateUser, getSingleUser);
 

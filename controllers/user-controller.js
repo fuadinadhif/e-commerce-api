@@ -27,7 +27,7 @@ const getSingleUser = async (req, res, next) => {
       "-password"
     );
     if (!user) {
-      throw new NotFoundError(`User with ID: ${req.params.id} does not exist`);
+      throw new NotFoundError(`user with ID: ${req.params.id} does not exist`);
     }
 
     checkPermission(req.user, user._id);
@@ -38,7 +38,7 @@ const getSingleUser = async (req, res, next) => {
   }
 };
 
-const showCurrentUser = async (req, res, next) => {
+const getCurrentUser = async (req, res, next) => {
   try {
     res.status(StatusCodes.OK).json({ user: req.user });
   } catch (error) {
@@ -46,11 +46,11 @@ const showCurrentUser = async (req, res, next) => {
   }
 };
 
-const updateUser = async (req, res, next) => {
+const updateUserProfile = async (req, res, next) => {
   try {
     const { name, email } = req.body;
     if (!name || !email) {
-      throw new BadRequestError("Please provide the new user name and email");
+      throw new BadRequestError("please provide the new user name and email");
     }
 
     const user = await UserModel.findOne({ _id: req.user.id });
@@ -64,7 +64,7 @@ const updateUser = async (req, res, next) => {
 
     res
       .status(StatusCodes.OK)
-      .json({ message: "User profile has been updated" });
+      .json({ message: "user profile has been updated" });
   } catch (error) {
     next(error);
   }
@@ -74,7 +74,7 @@ const updateUserPassword = async (req, res, next) => {
   try {
     const { oldPassword, newPassword } = req.body;
     if (!oldPassword || !newPassword) {
-      throw new BadRequestError("Please fill in the old and new password");
+      throw new BadRequestError("please fill in the old and new password");
     }
 
     const user = await UserModel.findOne({ _id: req.user.id });
@@ -87,7 +87,7 @@ const updateUserPassword = async (req, res, next) => {
 
     await user.save();
 
-    res.status(StatusCodes.OK).json({ message: "Password has been changed" });
+    res.status(StatusCodes.OK).json({ message: "password has been changed" });
   } catch (error) {
     next(error);
   }
@@ -96,7 +96,7 @@ const updateUserPassword = async (req, res, next) => {
 module.exports = {
   getAllUsers,
   getSingleUser,
-  showCurrentUser,
-  updateUser,
+  getCurrentUser,
+  updateUserProfile,
   updateUserPassword,
 };

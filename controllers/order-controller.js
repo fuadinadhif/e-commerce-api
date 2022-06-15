@@ -14,11 +14,11 @@ const createOrder = async (req, res, next) => {
   try {
     const { items: cartItems, tax, shippingFee } = req.body;
     if (!cartItems || cartItems.length < 1) {
-      throw new BadRequestError("There is no items in cart");
+      throw new BadRequestError("there is no items in cart");
     }
 
     if (!tax || !shippingFee) {
-      throw new BadRequestError("Please provide the tax and shipping fee");
+      throw new BadRequestError("please provide the tax and shipping fee");
     }
 
     let orderItems = [];
@@ -28,7 +28,7 @@ const createOrder = async (req, res, next) => {
       const dbProduct = await ProductModel.findOne({ _id: item.product });
       if (!dbProduct) {
         throw new NotFoundError(
-          `Product with ID: ${item.product} does not exist`
+          `product with ID: ${item.product} does not exist`
         );
       }
 
@@ -84,7 +84,7 @@ const getSingleOrder = async (req, res, next) => {
   try {
     const order = await OrderModel.findOne({ _id: req.params.id });
     if (!order) {
-      throw new NotFoundError("Product you search for does not exist");
+      throw new NotFoundError("product you search for does not exist");
     }
 
     checkPermission(req.user, order.user);
@@ -99,7 +99,7 @@ const getCurrentUserOrders = async (req, res, next) => {
   try {
     const order = await OrderModel.find({ user: req.user.id });
     if (!order || order.length < 1) {
-      throw new NotFoundError("User did not order anything yet");
+      throw new NotFoundError("user did not order anything yet");
     }
 
     res.status(StatusCodes.OK).json({ order });
@@ -114,7 +114,7 @@ const updateOrder = async (req, res, next) => {
 
     const order = await OrderModel.findOne({ _id: req.params.id });
     if (!order) {
-      throw new NotFoundError(`No order with this ID: ${req.params.id}`);
+      throw new NotFoundError(`no order with this ID: ${req.params.id}`);
     }
 
     checkPermission(req.user, order.user);
