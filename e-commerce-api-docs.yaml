@@ -1,12 +1,10 @@
 openapi: 3.0.0
 info:
   title: e-Commerce API Docs
-  description: This is an experimental API design of commonly used REST API for an e-Commerce. This API design is still full of uncompleted features/dummy data. Make sure to review the code before cloning/using it for your own project. <br><br> To access admin protected routes, log in with this credentials:<br><br> `email:super.admin@gmail.com`<br><br>`password:supersecret`
-  contact: {}
+  description: This is an experimental API design of commonly used REST API for an e-Commerce. <br> This API design is still full of uncompleted features/dummy data. Make sure to review the code before cloning/using it for your own project. <br><br> To access admin protected routes, log in with this credential:<br><br> `email:super.admin@gmail.com`<br><br>`password:supersecret`
   version: "1.0"
 servers:
-  - url: http://https://e-commerce-api-docs.herokuapp.com/api/v1
-    variables: {}
+  - url: https://e-commerce-api-docs.herokuapp.com/api/v1
 paths:
   /auth/logout:
     get:
@@ -14,23 +12,16 @@ paths:
         - auth
       summary: Log Out User
       operationId: LogOutUser
-      parameters: []
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
   /auth/login:
     post:
       tags:
         - auth
       summary: Log In User
       operationId: LogInUser
-      parameters: []
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -41,34 +32,20 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
+          description: succesful operation
         "400":
-          description: Please provide a valid email and password
+          description: invalid email and/or password
         "401":
-          description: Wrong password. Try Again
-          content:
-            application/json:
-              schema:
-                type: object
+          description: wrong password
         "404":
-          description: "{email} has not been registered yet"
-          content:
-            application/json:
-              schema:
-                type: object
-      deprecated: false
-      security: []
-    parameters: []
+          description: unregistered email
   /auth/register:
     post:
       tags:
         - auth
       summary: Register User
       operationId: RegisterUser
-      parameters: []
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -80,54 +57,34 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
+          description: successful operation
         "400":
-          description: Email has been used. Please use another address
-          content:
-            application/json:
-              schema:
-                type: object
-      deprecated: false
-      security: []
-    parameters: []
+          description: email has been registered
   /users:
     get:
       tags:
         - user
       summary: Get All Users
       operationId: GetAllUsers
-      parameters: []
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
   /users/showCurrentUser:
     get:
       tags:
         - user
       summary: Get Current User
       operationId: GetCurrentUser
-      parameters: []
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
   /users/updateUserProfile:
     patch:
       tags:
         - user
       summary: Update User Profile
       operationId: UpdateUserProfile
-      parameters: []
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -138,20 +95,16 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
+        "400":
+          description: invalid user name and/or email
   /users/updateUserPassword:
     patch:
       tags:
         - user
       summary: Update User Password
       operationId: UpdateUserPassword
-      parameters: []
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -162,11 +115,11 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
+        "400":
+          description: invalid user password
+        "401":
+          description: incorrect password
   /user/{id}:
     get:
       tags:
@@ -182,31 +135,22 @@ paths:
             type: string
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
   /products:
     get:
       tags:
         - product
       summary: Get All Products
       operationId: GetAllProducts
-      parameters: []
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
     post:
       tags:
         - product
       summary: Create Product
       operationId: CreateProduct
-      parameters: []
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -224,11 +168,27 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
+  /products/uploadImage:
+    post:
+      tags:
+        - product
+      summary: Upload Image
+      operationId: UploadImage
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - image
+              type: object
+              properties:
+                image:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: successful operation
   /products/{id}:
     parameters:
       - name: id
@@ -244,17 +204,15 @@ paths:
       operationId: GetSingleProduct
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
+        "404":
+          description: product does not exist
     patch:
       tags:
         - product
       summary: Update Product
       operationId: UpdateProduct
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -266,10 +224,9 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
+        "404":
+          description: product does not exist
     delete:
       tags:
         - product
@@ -277,10 +234,7 @@ paths:
       operationId: DeleteProduct
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
   /products/{id}/reviews:
     get:
       tags:
@@ -296,57 +250,24 @@ paths:
             type: string
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-  /products/uploadImage:
-    post:
-      tags:
-        - product
-      summary: Upload Image
-      operationId: UploadImage
-      parameters: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            encoding: {}
-            schema:
-              required:
-                - image
-              type: object
-              properties:
-                image:
-                  type: string
-        required: false
-      responses:
-        "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
+        "404":
+          description: product does not exist
   /reviews:
     get:
       tags:
         - review
       summary: Get All Reviews
       operationId: GetAllReviews
-      parameters: []
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
     post:
       tags:
         - review
       summary: Create Review
       operationId: CreateReview
-      parameters: []
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -359,11 +280,11 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
+        "400":
+          description: user already reviewed
+        "404":
+          description: product to be reviewed does not exist
   /reviews/{id}:
     parameters:
       - name: id
@@ -379,17 +300,15 @@ paths:
       operationId: GetSingleReview
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
+        "404":
+          description: review does not exist
     patch:
       tags:
         - review
       summary: Update Review
       operationId: UpdateReview
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -401,10 +320,9 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
+        "404":
+          description: review does not exist
     delete:
       tags:
         - review
@@ -412,31 +330,24 @@ paths:
       operationId: DeleteReview
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
+        "404":
+          description: review does not exist
   /orders:
     get:
       tags:
         - order
       summary: Get All Orders
       operationId: GetAllOrders
-      parameters: []
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
     post:
       tags:
         - order
       summary: Create Order
       operationId: CreateOrder
-      parameters: []
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -453,25 +364,22 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
+        "400":
+          description: invalid request
+        "404":
+          description: product does not exist
   /orders/showAllMyOrders:
     get:
       tags:
         - order
       summary: Get Current User Orders
       operationId: GetCurrentUserOrders
-      parameters: []
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
-    parameters: []
+          description: successful operation
+        "404":
+          description: empty cart
   /orders/{id}:
     parameters:
       - name: id
@@ -487,17 +395,13 @@ paths:
       operationId: GetSingleOrder
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: order does not exist
     patch:
       tags:
         - order
       summary: Update Status Order
       operationId: UpdateStatusOrder
       requestBody:
-        description: ""
         content:
           application/json:
             schema:
@@ -507,10 +411,9 @@ paths:
         required: true
       responses:
         "200":
-          description: ""
-          headers: {}
-      deprecated: false
-      security: []
+          description: successful operation
+        "404":
+          description: order does not exist
 components:
   schemas:
     LogInUserRequest:

@@ -35,15 +35,14 @@ app.use(rateLimiter({ windowMs: 15 * 60 * 1000, max: 60 }));
 app.use(helmet());
 app.use(cors());
 app.use(mongoSanitize());
-
-app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
+app.use(express.json());
 
 const swaggerDocument = YAML.load("./e-commerce-api-docs.yaml");
 const options = {
   customSiteTitle: "e-Commerce API Docs",
 };
-app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocument, options));
+app.get("/", swaggerUI.serve, swaggerUI.setup(swaggerDocument, options));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);

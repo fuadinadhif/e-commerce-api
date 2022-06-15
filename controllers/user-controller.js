@@ -80,9 +80,7 @@ const updateUserPassword = async (req, res, next) => {
     const user = await UserModel.findOne({ _id: req.user.id });
     const isPasswordCorrect = await user.comparePassword(oldPassword);
     if (!isPasswordCorrect) {
-      throw new UnauthorizedError(
-        "New password does not match with the old ones"
-      );
+      throw new UnauthorizedError("incorrect old password");
     }
 
     user.password = newPassword;
