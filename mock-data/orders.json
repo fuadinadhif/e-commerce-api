@@ -11,6 +11,13 @@
         "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
         "amount": 5,
         "product": "accentchairID"
+      },
+      {
+        "name": "emperor bed",
+        "price": 73999,
+        "image": "https://dl.airtable.com/.attachmentThumbnails/0446e84c5bca9643de3452a61b2d6195/1b32f48b",
+        "amount": 1,
+        "product": "emperorBedID"
       }
     ],
     "status": "pending",
@@ -55,7 +62,7 @@
         "price": 25999,
         "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
         "amount": 1,
-        "product": "accentchairID"
+        "product": "accentChairID"
       }
     ],
     "status": "pending",

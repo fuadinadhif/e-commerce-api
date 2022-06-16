@@ -2,26 +2,31 @@
   {
     "name": "Super Admin",
     "email": "super.admin@gmail.com",
-    "password": "supersecret"
+    "password": "supersecret",
+    "role": "admin"
   },
   {
     "name": "John Doe",
     "email": "john.doe@gmail.com",
-    "password": "thesecret"
+    "password": "thesecret",
+    "role": "user"
   },
   {
     "name": "Jane Doe",
     "email": "jane.doe@gmail.com",
-    "password": "thesecret"
+    "password": "thesecret",
+    "role": "user"
   },
   {
     "name": "Richard Williams",
     "email": "richard.williams@gmail.com",
-    "password": "thesecret"
+    "password": "thesecret",
+    "role": "user"
   },
   {
     "name": "Elizabeth Rose",
     "email": "elizabeth.rose@gmail.com",
-    "password": "thesecret"
+    "password": "thesecret",
+    "role": "user"
   }
 ]

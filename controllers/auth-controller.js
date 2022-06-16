@@ -22,10 +22,9 @@ const register = async (req, res, next) => {
     const role = isFirstAccount ? "admin" : "user";
     const user = await UserModel.create({ ...req.body, role });
 
-    const tokenPayload = createTokenPayload(user);
-    attachCookiesToResponse(res, tokenPayload);
-
-    res.status(StatusCodes.CREATED).json({ user: tokenPayload });
+    res
+      .status(StatusCodes.CREATED)
+      .json({ message: "account created. please proceed to login page", user });
   } catch (error) {
     next(error);
   }

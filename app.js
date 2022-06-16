@@ -46,6 +46,9 @@ const options = {
 app.use("/", swaggerUI.serve);
 app.get("/", swaggerUI.setup(swaggerDocument, options));
 
+const factoryReset = require("./controllers/factory-reset-controller");
+app.post("/api/v1/factory-reset", factoryReset);
+
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
