@@ -716,6 +716,9 @@ components:
 tags:
   - name: factory reset
     description: Erase all of the collections data and replace it with the default mock data
+    externalDocs:
+      description: Mock Data Preview
+      url: https://e-commerce-api-docs.herokuapp.com/api/v1/mock-data
   - name: auth
     description: Authentication operations
   - name: user
