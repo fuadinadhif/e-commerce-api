@@ -2,34 +2,65 @@
   {
     "tax": 399,
     "shippingFee": 499,
-    "items": [
+    "subTotal": 0,
+    "total": 0,
+    "orderItems": [
       {
         "name": "accent chair",
-        "price": 2599,
+        "price": 25999,
         "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
-        "amount": 34,
-        "product": "6126ad3424d2bd09165a68c8"
+        "amount": 5,
+        "product": "accentchairID"
       }
-    ]
+    ],
+    "status": "pending",
+    "user": "John Doe",
+    "clientSecret": "fakeStripeClientSecret",
+    "paymentIntentID": ""
   },
   {
-    "tax": 499,
+    "tax": 399,
     "shippingFee": 799,
-    "items": [
+    "subTotal": 0,
+    "total": 0,
+    "orderItems": [
       {
-        "name": "bed",
-        "price": 2699,
+        "name": "accent chair",
+        "price": 25999,
         "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
-        "amount": 3,
-        "product": "6126ad3424d2bd09165a68c7"
+        "amount": 1,
+        "product": "accentChairID"
       },
       {
-        "name": "chair",
-        "price": 2999,
-        "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
+        "name": "albany sectional",
+        "price": 10999,
+        "image": "https://dl.airtable.com/.attachmentThumbnails/0be1af59cf889899b5c9abb1e4db38a4/d631ac52",
         "amount": 2,
-        "product": "6126ad3424d2bd09165a68c4"
+        "product": "albanySectionalID"
       }
-    ]
+    ],
+    "status": "pending",
+    "user": "Jane Doe",
+    "clientSecret": "fakeStripeClientSecret",
+    "paymentIntentID": ""
+  },
+  {
+    "tax": 399,
+    "shippingFee": 199,
+    "subTotal": 0,
+    "total": 0,
+    "orderItems": [
+      {
+        "name": "accent chair",
+        "price": 25999,
+        "image": "https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160",
+        "amount": 1,
+        "product": "accentchairID"
+      }
+    ],
+    "status": "pending",
+    "user": "Richard Williams",
+    "clientSecret": "fakeStripeClientSecret",
+    "paymentIntentID": ""
   }
 ]

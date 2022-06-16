@@ -11,7 +11,6 @@ const ProductSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: [true, "Please give a price for this product"],
-      default: 0,
     },
     description: {
       type: String,
@@ -38,7 +37,6 @@ const ProductSchema = new mongoose.Schema(
     colors: {
       type: [String],
       required: true,
-      default: ["#222"],
     },
     featured: {
       type: Boolean,
@@ -46,12 +44,11 @@ const ProductSchema = new mongoose.Schema(
     },
     freeShipping: {
       type: Boolean,
-      default: 0,
+      default: false,
     },
     inventory: {
       type: Number,
       required: true,
-      default: 10,
     },
     averageRating: {
       type: Number,

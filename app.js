@@ -37,6 +37,7 @@ app.use(cors());
 app.use(mongoSanitize());
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(express.json());
+app.use(express.static("./public"));
 
 const swaggerDocument = YAML.load("./e-commerce-api-docs.yaml");
 const options = {

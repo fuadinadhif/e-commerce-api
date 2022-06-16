@@ -497,10 +497,13 @@ components:
       properties:
         name:
           type: string
+          minLength: 3
+          maxLength: 30
         email:
           type: string
         password:
           type: string
+          minLength: 8
     UpdateUserProfile:
       title: Update User Profile Request
       required:
@@ -510,6 +513,8 @@ components:
       properties:
         name:
           type: string
+          minLength: 3
+          maxLength: 30
         email:
           type: string
     UpdateUserPassword:
@@ -523,6 +528,7 @@ components:
           type: string
         newPassword:
           type: string
+          minLength: 8
     CreateProduct:
       title: Create Product Request
       required:
@@ -533,39 +539,80 @@ components:
         - category
         - company
         - colors
+        - inventory
       type: object
       properties:
         name:
           type: string
+          maxLength: 100
         price:
-          type: integer
+          type: number
         description:
           type: string
+          maxLength: 1000
         image:
           type: string
+          default: https://e-commerce-api-docs.herokuapp.com/assets/default-product-img.jpeg
         category:
           type: string
+          enum:
+            - office
+            - kitchen
+            - bedroom
         company:
           type: string
+          enum:
+            - ikea
+            - liddy
+            - marcos
         colors:
           type: array
           items:
             type: string
-          description: ""
+        featured:
+          type: boolean
+          default: false
+        freeShipping:
+          type: boolean
+          default: false
+        inventory:
+          type: integer
     UpdateProduct:
       title: Update Product Request
-      required:
-        - name
-        - price
-        - description
       type: object
       properties:
         name:
           type: string
+          maxLength: 100
         price:
-          type: integer
+          type: number
         description:
           type: string
+          maxLength: 1000
+        image:
+          type: string
+        category:
+          type: string
+          enum:
+            - office
+            - kitchen
+            - bedroom
+        company:
+          type: string
+          enum:
+            - ikea
+            - liddy
+            - marcos
+        colors:
+          type: array
+          items:
+            type: string
+        featured:
+          type: boolean
+        freeShipping:
+          type: boolean
+        inventory:
+          type: integer
     CreateReview:
       title: Create Review Request
       required:
@@ -577,43 +624,30 @@ components:
       properties:
         title:
           type: string
+          maxLength: 150
         rating:
-          type: integer
+          type: number
+          minLength: 1
+          maxLength: 5
         comment:
           type: string
         product:
           type: string
     UpdateReview:
       title: Update Review Request
-      required:
-        - title
-        - rating
-        - comment
       type: object
       properties:
         title:
           type: string
+          maxLength: 150
         rating:
-          type: integer
+          type: number
+          minLength: 1
+          maxLength: 5
         comment:
           type: string
-    CreateOrder:
-      title: Create Order Request
-      required:
-        - tax
-        - shippingFee
-        - items
-      type: object
-      properties:
-        tax:
-          type: integer
-        shippingFee:
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: "#/components/schemas/SingleItemOrder"
-          description: ""
+        product:
+          type: string
     SingleItemOrder:
       title: Single Item Order
       required:
@@ -627,13 +661,29 @@ components:
         name:
           type: string
         price:
-          type: integer
+          type: number
         image:
           type: string
         amount:
           type: integer
         product:
           type: string
+    CreateOrder:
+      title: Create Order Request
+      required:
+        - tax
+        - shippingFee
+        - orderItems
+      type: object
+      properties:
+        tax:
+          type: integer
+        shippingFee:
+          type: integer
+        orderItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/SingleItemOrder"
     UpdateStatusOrder:
       title: Update Status Order Request
       required:

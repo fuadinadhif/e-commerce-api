@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Super Admin",
+    "email": "super.admin@gmail.com",
+    "password": "supersecret"
+  },
+  {
+    "name": "John Doe",
+    "email": "john.doe@gmail.com",
+    "password": "thesecret"
+  },
+  {
+    "name": "Jane Doe",
+    "email": "jane.doe@gmail.com",
+    "password": "thesecret"
+  },
+  {
+    "name": "Richard Williams",
+    "email": "richard.williams@gmail.com",
+    "password": "thesecret"
+  },
+  {
+    "name": "Elizabeth Rose",
+    "email": "elizabeth.rose@gmail.com",
+    "password": "thesecret"
+  }
+]

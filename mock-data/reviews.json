@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Super comfy. Great for backpain!",
+    "rating": 4,
+    "comment": "It ease up and relieve my backpain a lot. Definitely worth the price.",
+    "user": "John Doe",
+    "product": "accent chair"
+  },
+  {
+    "title": "Comfy! Like sleeping on the clouds",
+    "rating": 5,
+    "comment": "Fuuh you will not believe it but it really is the best bed product you will ever have. Buy it right now!",
+    "user": "John Doe",
+    "product": "emperor bed"
+  },
+  {
+    "title": "Lack durability",
+    "rating": 2.5,
+    "comment": "At the start it feels okay but it only take one month for me to hearing the annoying cracking sound whenever I sat on top of it.",
+    "user": "Jane Doe",
+    "product": "accent chair"
+  },
+  {
+    "title": "The fabric washed away so fast",
+    "rating": 3,
+    "comment": "The fabric has great color and soft texture. But the color washed away after got contact with a spilled drink.",
+    "user": "Jane Doe",
+    "product": "albany sectional"
+  },
+  {
+    "title": "WHERE IS MY PRODUCT?!",
+    "rating": 1,
+    "comment": "I never received it. Damn scammer",
+    "user": "Richard Williams",
+    "product": "accent chair"
+  }
+]
