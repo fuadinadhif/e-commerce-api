@@ -6,6 +6,15 @@ info:
 servers:
   - url: https://e-commerce-api-docs.herokuapp.com/api/v1
 paths:
+  /factory-reset:
+    post:
+      tags:
+        - factory reset
+      summary: Reset Data
+      operationId: FactoryReset
+      responses:
+        "200":
+          description: successful operation
   /auth/logout:
     get:
       tags:
@@ -177,14 +186,17 @@ paths:
               $ref: "#/components/schemas/CreateProduct"
             example:
               name: emperor bed
-              price: 23999
-              description: Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge
+              price: 73999
+              description: The most soft comfortable fitted sheet to help you sleep better and have a quite refreshing morning, a luxurious fitted sheet available for any room in your house - bedroom, guest, kids room, vacation home and also for hotel.
               image: https://dl.airtable.com/.attachmentThumbnails/0446e84c5bca9643de3452a61b2d6195/1b32f48b
               category: bedroom
               company: ikea
               colors:
                 - "#0000ff"
                 - "#000"
+              featured: false
+              freeShipping: false
+              inventory: 20
         required: true
       responses:
         "200":
@@ -246,9 +258,18 @@ paths:
             schema:
               $ref: "#/components/schemas/UpdateProduct"
             example:
-              name: accent chair
-              price: 15999
-              description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              name: emperor bed
+              price: 53999
+              description: The most soft comfortable fitted sheet to help you sleep better and have a quite refreshing morning, a luxurious fitted sheet available for any room in your house - bedroom, guest, kids room, vacation home and also for hotel.
+              image: https://dl.airtable.com/.attachmentThumbnails/0446e84c5bca9643de3452a61b2d6195/1b32f48b
+              category: bedroom
+              company: ikea
+              colors:
+                - "#0000ff"
+                - "#000"
+              featured: true
+              freeShipping: true
+              inventory: 10
         required: true
       responses:
         "200":
@@ -309,9 +330,9 @@ paths:
             schema:
               $ref: "#/components/schemas/CreateReview"
             example:
-              title: Super comfy. Great for backpain!
-              rating: 4
-              comment: It ease up and relieve my backpain a lot. Definitely worth the price.
+              title: Great after-sale service
+              rating: 3
+              comment: I have some problems after buy this product. Tried to contact their Customer Service and voila-problem solved.
               product: 62a37f66ea6bfcf12484abeb
         required: true
       responses:
@@ -399,11 +420,11 @@ paths:
             schema:
               $ref: "#/components/schemas/CreateOrder"
             example:
-              tax: 499
-              shippingFee: 799
-              items:
+              tax: 299
+              shippingFee: 699
+              cartItems:
                 - name: accent chair
-                  price: 15999
+                  price: 25999
                   image: https://dl.airtable.com/.attachmentThumbnails/e8bc3791196535af65f40e36993b9e1f/438bd160
                   amount: 3
                   product: 62a37f66ea6bfcf12484abeb
@@ -673,14 +694,14 @@ components:
       required:
         - tax
         - shippingFee
-        - orderItems
+        - cartItems
       type: object
       properties:
         tax:
           type: integer
         shippingFee:
           type: integer
-        orderItems:
+        cartItems:
           type: array
           items:
             $ref: "#/components/schemas/SingleItemOrder"
@@ -693,8 +714,15 @@ components:
         paymentIntentID:
           type: string
 tags:
+  - name: factory reset
+    description: Erase all of the collections data and replace it with the default mock data
   - name: auth
+    description: Authentication operations
   - name: user
+    description: Operations about user
   - name: product
+    description: Operations about product
   - name: review
+    description: Operations about review
   - name: order
+    description: Operations about order

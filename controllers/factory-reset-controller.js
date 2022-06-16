@@ -44,7 +44,7 @@ const factoryReset = async (req, res, next) => {
     // populate orders collection
     for (order of orderData) {
       let subTotal = 0;
-      for (item of order.orderItems) {
+      for (item of order.cartItems) {
         subTotal += item.price * item.amount;
         const product = await ProductModel.findOne({ name: item.name });
         item.product = product._id;
