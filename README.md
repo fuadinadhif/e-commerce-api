@@ -7,7 +7,7 @@ This API design is still full of uncompleted features/dummy data. Make sure to r
 
 ## Usage
 
-Any request will be served/saved on MongoDB Atlas and assets on Cloudinary (both free tier of course :slightly_smiling_face:) so you can used it directly using the [documentation](https://e-commerce-api-docs.herokuapp.com/) as a guide. Or you can clone this repo and set up your own server.
+Any request will be served/saved on MongoDB Atlas and assets on Cloudinary (both free tier of course :slightly_smiling_face:) so you can used it directly using [the documentation](https://e-commerce-api-docs.herokuapp.com/) as a guide. Or you can clone this repo and set up your own server.
 
 **Note**: Because of the limitation of free tier on MongoDB Atlas and Cloudinary. The database will be clean up periodically.
 
