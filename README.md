@@ -3,12 +3,11 @@
 Full API documentation hosted on https://e-commerce-api-docs.herokuapp.com/
 
 This is an experimental API design of commonly used REST API for an e-Commerce.
-Feel free to use it for your own project but own your risks as this project still on experimental stage.
-Hoping this could be used similar to [REQRES API](https://reqres.in/) someday.
+This API design is still full of uncompleted features/dummy data. Make sure to review the code before cloning/using it for your own project.
 
 ## Usage
 
-This project served on MongoDB Atlas and assets on Cloudinary (both free tier of course :slightly_smiling_face:) so you can used it directly using the [documentation](https://e-commerce-api-docs.herokuapp.com/) as a guide. Or you can clone this repo and set up your own server.
+Any request will be served/saved on MongoDB Atlas and assets on Cloudinary (both free tier of course :slightly_smiling_face:) so you can used it directly using the [documentation](https://e-commerce-api-docs.herokuapp.com/) as a guide. Or you can clone this repo and set up your own server.
 
 **Note**: Because of the limitation of free tier on MongoDB Atlas and Cloudinary. The database will be clean up periodically.
 
@@ -30,12 +29,12 @@ To run this project, you will need to add the following environment variables to
 `CLOUD_API_KEY`
 `CLOUD_API_SECRET`
 
-## Stack
+## Stacks & Services
 
 - Node.js/Express
 - MongoDB/Mongoose
 - Cloudinary
-- Documentation: [Docgen](https://github.com/thedevsaddam/docgen) (Easier setup compared too [Swagger](https://swagger.io/) but way less features)
+- Documentation: [Swagger](https://swagger.io/)
 
 ## License
 
