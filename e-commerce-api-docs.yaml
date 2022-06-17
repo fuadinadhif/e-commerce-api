@@ -1,8 +1,19 @@
 openapi: 3.0.0
 info:
   title: e-Commerce API Docs
-  description: This is an experimental API design of commonly used REST API for an e-Commerce. <br> This API design is still full of uncompleted features/dummy data. Make sure to review the code before cloning/using it for your own project. <br><br> To access admin protected routes, log in with this credential:<br><br> `email:super.admin@gmail.com`<br><br>`password:supersecret`
+  description: |
+    This is an experimental API design of commonly used REST API for an e-Commerce. <br>
+    This API design is still full of uncompleted features/dummy data. Make sure to review the code before cloning/using it for your own project.
+
+    To access admin protected routes, log in with this credential:
+
+    ```email: super.admin@gmail.com```
+    ```password: supersecret```
+    ---
   version: "1.0"
+externalDocs:
+  description: GitHub Repository
+  url: https://github.com/fuadinadhif/e-commerce-api
 servers:
   - url: https://e-commerce-api-docs.herokuapp.com/api/v1
 paths:
@@ -10,7 +21,7 @@ paths:
     post:
       tags:
         - factory reset
-      summary: Reset Data
+      summary: Reset Data | For testing purpose only
       operationId: FactoryReset
       responses:
         "200":

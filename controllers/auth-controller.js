@@ -24,7 +24,10 @@ const register = async (req, res, next) => {
 
     res
       .status(StatusCodes.CREATED)
-      .json({ message: "account created. please proceed to login page", user });
+      .json({
+        message: "account created. please proceed to the login page",
+        user,
+      });
   } catch (error) {
     next(error);
   }
