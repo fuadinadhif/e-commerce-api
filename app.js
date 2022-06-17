@@ -34,7 +34,7 @@ const productData = require("./mock-data/products.json");
 const reviewData = require("./mock-data/reviews.json");
 const orderData = require("./mock-data/orders.json");
 
-// express package routes and fuctions
+// npm & express packages routes and fuctions
 app.use(xss());
 app.set("trust proxy", 1);
 app.use(rateLimiter({ windowMs: 15 * 60 * 1000, max: 60 }));
